@@ -3,14 +3,14 @@ namespace Kav\Burgers;
 
 class Db
 {
-    const CONFIG_PATH = 'src/config.json';
     const ERR_CONFIG = 'Не найден файл конфигурации';
     const ERR_QUERY = 'Неизвестная ошибка запроса';
 
     private static $instance;
     /** @var \PDO */
     private $pdo;
-    private $config;
+    private string $configPath;
+    private array $config;
 
     private function __construct()
     {
@@ -22,10 +22,11 @@ class Db
 
     }
 
-    public static function getInstance()
+    public static function getInstance($configPath)
     {
         if (!self::$instance) {
             self::$instance = new self();
+            self::$instance->configPath = $configPath;
         }
 
         return self::$instance;
@@ -33,12 +34,12 @@ class Db
 
     private function getConfig()
     {
-        $config = file_get_contents(self::CONFIG_PATH);
+        $config = file_get_contents($this->configPath);
         if (!$config) {
-            trigger_error(self::ERR_CONFIG);
+            trigger_error(self::ERR_CONFIG, E_USER_ERROR);
             return false;
         }
-        $this->config = json_encode($config, true);
+        $this->config = json_decode($config, true);
         return true;
     }
 
@@ -46,7 +47,7 @@ class Db
     {
         if (!$this->pdo) {
             if ($this->getConfig()) {
-                $this->pdo = new PDO('mysql:host=' . $this->config['host'] . ';dbname=' . $this->config['dbname'], $this->config['user'], $this->config['password']);
+                $this->pdo = new \PDO('mysql:host=' . $this->config['host'] . ';dbname=' . $this->config['dbname'], $this->config['user'], $this->config['password']);
             }
         }
 
