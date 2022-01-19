@@ -8,7 +8,7 @@ class Users
     const ERR_PHONE = 'Не указан телефон';
     const ERR_EMAIL = 'Не указана почта';
 
-    public function __construct(array $args = [])
+    public function __construct()
     {
 
     }
@@ -46,5 +46,11 @@ class Users
     {
         $db = Db::getInstance();
         return $db->fetchAll('SELECT * FROM users');
+    }
+
+    public function getById(int $id)
+    {
+        $db = Db::getInstance();
+        return $db->fetch('SELECT * FROM users WHERE id = ' . $id);
     }
 }

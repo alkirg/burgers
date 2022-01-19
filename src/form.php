@@ -1,5 +1,6 @@
 <?php
-require_once 'Kav/Burgers/Db.php';
+require_once 'Kav/Burgers/Users.php';
+require_once 'Kav/Burgers/Orders.php';
 
 $name = $_POST['name'];
 $phone = $_POST['phone'];
