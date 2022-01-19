@@ -3,7 +3,7 @@ namespace Kav\Burgers;
 
 class Db
 {
-    const CONFIG_PATH = '/opt/lampp/htdocs/burgers/src/config.json';
+    const CONFIG_PATH = __DIR__ . '/../../config.json';
     const ERR_CONFIG = 'Не найден файл конфигурации';
     const ERR_QUERY = 'Неизвестная ошибка запроса';
 
