@@ -8,17 +8,9 @@ class Users
     const ERR_PHONE = 'Не указан телефон';
     const ERR_EMAIL = 'Не указана почта';
 
-    public $id;
-    public $name;
-    public $phone;
-    public $email;
-
     public function __construct(array $args = [])
     {
-        $this->id = $args['id'];
-        $this->name = $args['name'];
-        $this->phone = $args['phone'];
-        $this->email = $args['email'];
+
     }
 
     public function add(array $fields)
