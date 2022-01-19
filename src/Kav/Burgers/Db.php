@@ -3,13 +3,13 @@ namespace Kav\Burgers;
 
 class Db
 {
+    const CONFIG_PATH = '/opt/lampp/htdocs/burgers/src/config.json';
     const ERR_CONFIG = 'Не найден файл конфигурации';
     const ERR_QUERY = 'Неизвестная ошибка запроса';
 
     private static $instance;
     /** @var \PDO */
     private $pdo;
-    private string $configPath;
     private array $config;
 
     private function __construct()
@@ -22,11 +22,10 @@ class Db
 
     }
 
-    public static function getInstance($configPath)
+    public static function getInstance()
     {
         if (!self::$instance) {
             self::$instance = new self();
-            self::$instance->configPath = $configPath;
         }
 
         return self::$instance;
@@ -34,7 +33,7 @@ class Db
 
     private function getConfig()
     {
-        $config = file_get_contents($this->configPath);
+        $config = file_get_contents(self::CONFIG_PATH);
         if (!$config) {
             trigger_error(self::ERR_CONFIG, E_USER_ERROR);
             return false;
@@ -52,6 +51,12 @@ class Db
         }
 
         return $this->pdo;
+    }
+
+    public function lastInsertId()
+    {
+        $this->connect();
+        return $this->pdo->lastInsertId();
     }
 
     public function exec(string $query, array $params = [])
