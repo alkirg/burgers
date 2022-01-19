@@ -29,6 +29,12 @@ class Orders
             return false;
         }
         $db = Db::getInstance();
+        if (!$fields['change']) {
+            $fields['change'] = 0;
+        }
+        if (!$fields['card']) {
+            $fields['card'] = 0;
+        }
         $db->exec('INSERT INTO orders(user_id, address, comments, `change`, card, callback) VALUES (:user_id, :address, :comments, :change, :card, :callback)', [':user_id' => $fields['user'], ':address' => $fields['address'], ':comments' => $fields['comments'], ':change' => $fields['change'], ':card' => $fields['card'], ':callback' => $fields['callback']]);
         return $db->lastInsertId();
     }
@@ -37,5 +43,11 @@ class Orders
     {
         $db = Db::getInstance();
         return $db->fetch('SELECT * FROM orders WHERE id = ' . $id);
+    }
+
+    public function countOrdersByUser(int $user)
+    {
+        $db = Db::getInstance();
+        return $db->fetch('SELECT count(*) as `count` from orders where user_id = ' . $user)['count'];
     }
 }

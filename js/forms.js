@@ -9,5 +9,8 @@ form.onsubmit = async (e) => {
 
     let result = await response.json();
 
-    console.log(result.message);
+    if (result.success)
+        form.innerHTML = result.message;
+    else
+        form.innerHTML += '<span style="color:red;">' + result.message + '</span>';
 };
