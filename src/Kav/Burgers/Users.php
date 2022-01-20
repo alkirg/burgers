@@ -8,11 +8,6 @@ class Users
     const ERR_PHONE = 'Не указан телефон';
     const ERR_EMAIL = 'Не указана почта';
 
-    public function __construct()
-    {
-
-    }
-
     public function add(array $fields)
     {
         if (!$fields['name']) {

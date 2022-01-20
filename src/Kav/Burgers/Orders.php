@@ -8,11 +8,6 @@ class Orders
     const ERR_USER = 'Пользователь не найден';
     const ERR_ADDRESS = 'Не указан адрес';
 
-    public function __construct()
-    {
-
-    }
-
     public function add(array $fields)
     {
         if (!$fields['user']) {

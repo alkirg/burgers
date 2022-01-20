@@ -35,7 +35,7 @@ class Db
     {
         $config = file_get_contents(self::CONFIG_PATH);
         if (!$config) {
-            trigger_error(self::ERR_CONFIG, E_USER_ERROR);
+            echo self::ERR_CONFIG;
             return false;
         }
         $this->config = json_decode($config, true);
