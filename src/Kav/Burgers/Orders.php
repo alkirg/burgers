@@ -36,13 +36,11 @@ class Orders
 
     public function getById(int $id)
     {
-        $db = Db::getInstance();
-        return $db->fetch('SELECT * FROM orders WHERE id = ' . $id);
+        return Db::getInstance()->fetch('SELECT * FROM orders WHERE id = ' . $id);
     }
 
     public function countOrdersByUser(int $user)
     {
-        $db = Db::getInstance();
-        return $db->fetch('SELECT count(*) as `count` from orders where user_id = ' . $user)['count'];
+        return Db::getInstance()->fetch('SELECT count(*) as `count` from orders where user_id = ' . $user)['count'];
     }
 }

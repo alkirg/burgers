@@ -33,19 +33,16 @@ class Users
 
     public function getByEmail(string $email)
     {
-        $db = Db::getInstance();
-        return $db->fetch('SELECT * FROM users WHERE email = :email', [':email' => $email]);
+        return Db::getInstance()->fetch('SELECT * FROM users WHERE email = :email', [':email' => $email]);
     }
 
     public function get()
     {
-        $db = Db::getInstance();
-        return $db->fetchAll('SELECT * FROM users');
+        return Db::getInstance()->fetchAll('SELECT * FROM users');
     }
 
     public function getById(int $id)
     {
-        $db = Db::getInstance();
-        return $db->fetch('SELECT * FROM users WHERE id = ' . $id);
+        return Db::getInstance()->fetch('SELECT * FROM users WHERE id = ' . $id);
     }
 }
