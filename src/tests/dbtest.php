@@ -9,6 +9,8 @@ use Kav\Burgers\Db;
 //$db = Db::getInstance();
 //$db->exec($q, [':name' => 'test2', ':phone' => '43434', ':email' => 'test@example.com']);
 
+error_reporting(0);
+
 $q = 'SELECT * FROM users';
 $db = Db::getInstance();
 var_dump($db->fetchAll($q));
