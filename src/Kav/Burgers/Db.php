@@ -3,7 +3,7 @@ namespace Kav\Burgers;
 
 class Db
 {
-    const CONFIG_PATH = __DIR__ . '/../../../configs.json';
+    const CONFIG_PATH = __DIR__ . '/../../../config.json';
     const ERR_CONFIG = 'Не найден файл конфигурации';
     const ERR_QUERY = 'Неизвестная ошибка запроса';
 
@@ -47,7 +47,7 @@ class Db
     {
         if (!$this->pdo) {
             $this->getConfig();
-            $this->pdo = new \PDO('mysql:host=' . $this->config['host'] . ';dbname=' . $this->config['dbname'], $this->config['user'], $this->config['password']);
+            $this->pdo = new \PDO('mysql:host=' . !empty($this->config['host']) . ';dbname=' . !empty($this->config['dbname']), !empty($this->config['user']), !empty($this->config['password']));
         }
 
         return $this->pdo;
